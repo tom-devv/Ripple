@@ -17,10 +17,8 @@ public class ExampleCommand implements CommandExecutor {
         if(commandSender instanceof Player){
             Player player = (Player) commandSender;
             Set<Location> locations = BlockUtils.getNearbyLocations(player.getLocation(), 2);
-            AbstractAnimation animation = Ripple.getAnimationFactory().initializeHoverAnimation(100, 20, player.getWorld(), locations);
+            AbstractAnimation animation = Ripple.getAnimationFactory().initializeSpinAnimation(100, 20, player.getWorld(), player.getLocation(), 10);
             animation.play();
-            System.out.println("Playing Animation");
-
         }
 
         return true;
