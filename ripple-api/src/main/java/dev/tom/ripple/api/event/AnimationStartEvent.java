@@ -1,6 +1,6 @@
-package dev.tom.event;
+package dev.tom.ripple.api.event;
 
-import dev.tom.animator.Animation;
+import dev.tom.ripple.api.animation.Animation;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.event.Cancellable;

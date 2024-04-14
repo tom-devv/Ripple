@@ -1,4 +1,4 @@
-package dev.tom.event;
+package dev.tom.ripple.api.event;
 
 import lombok.NonNull;
 import org.bukkit.event.Event;

@@ -1,11 +1,11 @@
-package dev.tom;
+package dev.tom.ripple.core;
 
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-public class Ripple {
+public class RippleCore {
 
     @Getter
     private static JavaPlugin instance;

@@ -4,12 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dev.tom</groupId>
+    <parent>
+        <groupId>dev.tom</groupId>
+        <artifactId>ripple-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>ripple-example</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>ripple-example</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -37,6 +39,11 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>C:\Users\thoma\Desktop\Active\servers\1.20.4\plugins</outputDirectory>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -69,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>dev.tom</groupId>
-            <artifactId>ripple-api</artifactId>
+            <artifactId>ripple-bukkit</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

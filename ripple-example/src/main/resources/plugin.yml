@@ -1,4 +1,12 @@
 name: ripple-example
-version: '${project.version}'
-main: dev.tom.rippleexample.Ripple_example
+version: 1.0
+main: dev.tom.ripple.example.Main
+description: Example plugin for Ripple
 api-version: '1.20'
+
+commands:
+    example:
+        description: Example command
+        usage: /example
+        permission: ripple.example
+        aliases: [ex]
