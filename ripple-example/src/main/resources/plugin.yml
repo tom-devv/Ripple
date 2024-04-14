@@ -1,0 +1,4 @@
+name: ripple-example
+version: '${project.version}'
+main: dev.tom.rippleexample.Ripple_example
+api-version: '1.20'

@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>ripple-api</module>
+        <module>ripple-example</module>
+        <module>ripple-core</module>
     </modules>
 
     <properties>
