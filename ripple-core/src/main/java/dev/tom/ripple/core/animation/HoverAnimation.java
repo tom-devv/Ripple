@@ -1,5 +1,6 @@
 package dev.tom.ripple.core.animation;
 
+import dev.tom.ripple.api.animation.Repeatable;
 import dev.tom.ripple.core.RippleCore;
 import dev.tom.ripple.core.utils.BlockUtils;
 import org.bukkit.Location;
@@ -14,10 +15,10 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public class HoverAnimation extends AbstractAnimation {
+public class HoverAnimation extends AbstractAnimation implements Repeatable {
 
-    private Set<Entity> entities = new HashSet<>();
     private double translation = 0;
+    private boolean repeat = false;
 
     public HoverAnimation(long duration, double speed, World world, Set<Location> locations) {
         super(duration, speed, world, locations);
@@ -26,13 +27,9 @@ public class HoverAnimation extends AbstractAnimation {
     @Override
     public void play() {
         startInternal();
-        entities = BlockUtils.locationToEntity(world, locations);
-        for (Location location : locations) {
-            location.getBlock().setType(Material.AIR, false);
-        }
+        setEntities(BlockUtils.locationToEntity(world, locations));
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
-
             @Override
             public void run() {
                 if (i > getDuration()) {
@@ -40,7 +37,7 @@ public class HoverAnimation extends AbstractAnimation {
                     end();
                     this.cancel();
                 }
-                double trans = Math.sin((double) i / 10) * 0.1;
+                double trans = Math.sin((double) i / 100) * getSpeed();
                 for (Entity entity : entities) {
                     entity.teleport(entity.getLocation().add(0, trans, 0));
                 }
@@ -49,13 +46,13 @@ public class HoverAnimation extends AbstractAnimation {
                 i++;
             }
         }.runTaskTimer(RippleCore.getInstance(), 0, 1);
+        setAnimationTask(task);
     }
 
     // Set the block data back to the original state and remove the entities
     @Override
     public void end() {
         int translationVector = (int) Math.round(this.translation);
-
         for (Entity entity : entities) {
             entity.remove();
         }
@@ -65,4 +62,13 @@ public class HoverAnimation extends AbstractAnimation {
         }
     }
 
+    @Override
+    public boolean isRepeat() {
+        return this.repeat;
+    }
+
+    @Override
+    public void setRepeat(boolean repeat) {
+        this.repeat = repeat;
+    }
 }

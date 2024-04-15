@@ -32,7 +32,8 @@ public class RippleCore {
             return;
         }
         for (AbstractAnimation animation : animations) {
-
+            animation.getAnimationTask().cancel();
+            animation.reset(animation.getEntities());
         }
     }
 

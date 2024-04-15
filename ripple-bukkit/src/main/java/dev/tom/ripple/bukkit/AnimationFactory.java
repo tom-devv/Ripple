@@ -17,6 +17,6 @@ public class AnimationFactory {
     }
 
     public AbstractAnimation initializeSpinAnimation(long duration, double speed, World world, Set<Location> locations) {
-        return new SpinAnimation(duration, speed, world, locations);
+        return new SpinAnimation(duration, speed, world, locations, true, true);
     }
 }

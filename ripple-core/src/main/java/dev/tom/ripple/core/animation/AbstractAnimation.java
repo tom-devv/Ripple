@@ -8,14 +8,18 @@ import dev.tom.ripple.core.RippleCore;
 import dev.tom.ripple.core.animation.state.AnimationState;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +33,8 @@ public abstract class AbstractAnimation implements Animation {
     protected final World world;
     protected final Set<Location> locations;
     protected final Map<Location, BlockData> blocks = new HashMap<>();
+    protected @Setter Set<Entity> entities = new HashSet<>();
+    protected @Setter BukkitTask animationTask = null;
 
     public AbstractAnimation(long duration, double speed, @NonNull  World world,  @NonNull Set<Location> locations) {
         this.duration = duration;
@@ -42,6 +48,9 @@ public abstract class AbstractAnimation implements Animation {
 
     protected void startInternal() {
         state = AnimationState.RUNNING;
+        for (Location location : locations) {
+            location.getBlock().setType(Material.AIR, false);
+        }
         RippleCore.getAnimations().add(this);
         Bukkit.getServer().getPluginManager().callEvent(new AnimationStartEvent(this));
     }
@@ -56,12 +65,23 @@ public abstract class AbstractAnimation implements Animation {
     public void reset(Set<Entity> entities) {
         RippleCore.getAnimations().remove(this);
         Bukkit.getServer().getPluginManager().callEvent(new AnimationResetEvent(this));
-        for (Entity entity : entities) {
-            entity.remove();
-        }
         for (Map.Entry<Location, BlockData> locationBlockEntry : blocks.entrySet()) {
             locationBlockEntry.getKey().getBlock().setBlockData(locationBlockEntry.getValue(), false);
         }
-
+        if(entities.isEmpty()) return;
+        for (Entity entity : entities) {
+            entity.remove();
+        }
     }
+
+    public Set<Entity> addEntity(Entity entity) {
+        this.entities.add(entity);
+        return this.entities;
+    }
+
+    public Set<Entity> removeEntity(Entity entity) {
+        this.entities.remove(entity);
+        return this.entities;
+    }
+
 }
