@@ -6,7 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Ripple {
 
     public static void initialize(JavaPlugin plugin){
-        RippleCore.initalize(plugin);
+        RippleCore.initialize(plugin);
+    }
+
+    public static void shutdown(){
+        RippleCore.shutdown();
     }
 
     public static AnimationFactory getAnimationFactory(){

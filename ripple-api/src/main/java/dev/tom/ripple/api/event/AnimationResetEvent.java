@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
-public class AnimationEndEvent extends RippleEvent {
+public class AnimationResetEvent extends RippleEvent {
 
     @NonNull
     private final Animation animation;
 
-    public AnimationEndEvent(@NonNull Animation animation) {
+    public AnimationResetEvent(@NonNull Animation animation) {
         this.animation = animation;
     }
-
 }

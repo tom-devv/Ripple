@@ -3,6 +3,7 @@ package dev.tom.ripple.example;
 import dev.tom.ripple.api.event.AnimationStartEvent;
 import dev.tom.ripple.bukkit.AnimationFactory;
 import dev.tom.ripple.bukkit.Ripple;
+import dev.tom.ripple.core.RippleCore;
 import dev.tom.ripple.core.animation.AbstractAnimation;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

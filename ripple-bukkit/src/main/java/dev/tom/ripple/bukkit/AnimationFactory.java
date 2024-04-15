@@ -16,7 +16,7 @@ public class AnimationFactory {
         return new HoverAnimation(duration, speed, world, locations);
     }
 
-    public AbstractAnimation initializeSpinAnimation(long duration, double speed, World world, Location center, int radius) {
-        return new SpinAnimation(duration, speed, world, center, radius);
+    public AbstractAnimation initializeSpinAnimation(long duration, double speed, World world, Set<Location> locations) {
+        return new SpinAnimation(duration, speed, world, locations);
     }
 }

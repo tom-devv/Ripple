@@ -16,19 +16,11 @@ import java.util.*;
 
 public class HoverAnimation extends AbstractAnimation {
 
-    private final Set<Location> locations;
-    private Map<Location, BlockData> blockMap = new HashMap<>();
     private Set<Entity> entities = new HashSet<>();
-    private final World world;
     private double translation = 0;
 
     public HoverAnimation(long duration, double speed, World world, Set<Location> locations) {
-        super(duration, speed);
-        this.locations = locations;
-        this.world = world;
-        for (Location location : locations) {
-            blockMap.put(location.clone(), location.getBlock().getBlockData().clone());
-        }
+        super(duration, speed, world, locations);
     }
 
     @Override
@@ -68,9 +60,9 @@ public class HoverAnimation extends AbstractAnimation {
             entity.remove();
         }
         for (Location location : locations) {
-            BlockData data = blockMap.get(location);
+            BlockData data = blocks.get(location);
             location.add(0, translationVector, 0).getBlock().setBlockData(data, false);
         }
-
     }
+
 }
