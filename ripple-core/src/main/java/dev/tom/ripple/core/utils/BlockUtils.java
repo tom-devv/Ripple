@@ -22,6 +22,7 @@ public class BlockUtils {
         for (Block block : blocks) {
             BlockDisplay blockDisplay = world.spawn(block.getLocation(), BlockDisplay.class, (display) -> {
                 display.setInterpolationDelay(1);
+                display.setInterpolationDuration(80);
                 display.setBlock(block.getBlockData());
                 display.setPersistent(false);
                 display.setGravity(false);

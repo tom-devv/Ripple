@@ -20,7 +20,7 @@ public class ExampleCommand implements CommandExecutor {
             Player player = (Player) commandSender;
             Set<Location> locations = BlockUtils.getNearbyLocations(player.getLocation(), 2);
             if(locations.isEmpty()) return false;
-            AbstractAnimation animation = Ripple.getAnimationFactory().initializeExplodeAnimation(80, 40, Particle.EXPLOSION_HUGE, 100, player.getWorld(), locations);
+            AbstractAnimation animation = Ripple.getAnimationFactory().initializeExplodeAnimation(0.25F, 80, 76, Particle.EXPLOSION_HUGE, 100, player.getWorld(), locations);
             animation.play();
         }
 

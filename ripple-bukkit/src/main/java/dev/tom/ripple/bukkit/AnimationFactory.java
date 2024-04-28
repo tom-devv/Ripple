@@ -22,7 +22,7 @@ public class AnimationFactory {
         return new SpinAnimation(duration, speed, world, locations, true, true);
     }
 
-    public AbstractAnimation initializeExplodeAnimation(long duration, long expandTick, Particle particle, int particleNumber, World world, Set<Location> locations) {
-        return new ExplodeAnimation(duration, expandTick, particle, particleNumber, world, locations);
+    public AbstractAnimation initializeExplodeAnimation(float expand, long duration, long expandTick, Particle particle, int particleNumber, World world, Set<Location> locations) {
+        return new ExplodeAnimation(expand, duration, expandTick, particle, particleNumber, world, locations);
     }
 }
