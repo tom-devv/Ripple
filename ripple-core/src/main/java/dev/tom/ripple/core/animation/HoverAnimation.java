@@ -26,8 +26,8 @@ public class HoverAnimation extends AbstractAnimation implements Repeatable {
 
     @Override
     public void play() {
-        startInternal();
         setEntities(BlockUtils.locationToEntity(world, locations));
+        startInternal();
         BukkitTask task = new BukkitRunnable() {
             int i = 0;
             @Override

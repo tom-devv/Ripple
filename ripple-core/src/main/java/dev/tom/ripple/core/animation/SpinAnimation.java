@@ -6,6 +6,7 @@ import dev.tom.ripple.core.utils.BlockUtils;
 import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -28,7 +29,7 @@ public class SpinAnimation extends AbstractAnimation implements Repeatable {
 
     @Override
     public void play() {
-        Set<Entity> entities = BlockUtils.locationToEntity(world, locations);
+        Set<BlockDisplay> entities = BlockUtils.locationToEntity(world, locations);
         startInternal();
         for (Entity entity : entities) {
             BukkitTask task = new BukkitRunnable() {

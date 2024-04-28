@@ -9,7 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,10 +17,11 @@ import java.util.Set;
 @UtilityClass
 public class BlockUtils {
     
-    public Set<Entity> blockToEntity(World world, Set<Block> blocks) {
-        Set<Entity> entities = new HashSet<>();
+    public Set<BlockDisplay> blockToDisplay(World world, Set<Block> blocks) {
+        Set<BlockDisplay> entities = new HashSet<>();
         for (Block block : blocks) {
             BlockDisplay blockDisplay = world.spawn(block.getLocation(), BlockDisplay.class, (display) -> {
+                display.setInterpolationDelay(1);
                 display.setBlock(block.getBlockData());
                 display.setPersistent(false);
                 display.setGravity(false);
@@ -31,14 +32,14 @@ public class BlockUtils {
         return entities;
     }
 
-    public Set<Entity> locationToEntity(World world, Set<Location> locations) {
+    public Set<BlockDisplay> locationToEntity(World world, Set<Location> locations) {
         Set<Block> blocks = new HashSet<>();
         for (Location location : locations) {
             BlockData data = location.getBlock().getBlockData();
             if(data.getMaterial().equals(Material.AIR)) continue;
             blocks.add(location.getBlock());
         };
-        return blockToEntity(world, blocks);
+        return blockToDisplay(world, blocks);
     }
 
     public Set<Location> getNearbyLocations(Location location, double radius){

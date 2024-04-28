@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -33,7 +34,7 @@ public abstract class AbstractAnimation implements Animation {
     protected final World world;
     protected final Set<Location> locations;
     protected final Map<Location, BlockData> blocks = new HashMap<>();
-    protected @Setter Set<Entity> entities = new HashSet<>();
+    protected @Setter Set<BlockDisplay> entities = new HashSet<>();
     protected @Setter BukkitTask animationTask = null;
 
     public AbstractAnimation(long duration, double speed, @NonNull  World world,  @NonNull Set<Location> locations) {
@@ -62,7 +63,7 @@ public abstract class AbstractAnimation implements Animation {
     }
 
     @Override
-    public void reset(Set<Entity> entities) {
+    public void reset(Set<BlockDisplay> entities) {
         RippleCore.getAnimations().remove(this);
         Bukkit.getServer().getPluginManager().callEvent(new AnimationResetEvent(this));
         for (Map.Entry<Location, BlockData> locationBlockEntry : blocks.entrySet()) {
@@ -74,12 +75,12 @@ public abstract class AbstractAnimation implements Animation {
         }
     }
 
-    public Set<Entity> addEntity(Entity entity) {
+    public Set<BlockDisplay> addEntity(BlockDisplay entity) {
         this.entities.add(entity);
         return this.entities;
     }
 
-    public Set<Entity> removeEntity(Entity entity) {
+    public Set<BlockDisplay> removeEntity(BlockDisplay entity) {
         this.entities.remove(entity);
         return this.entities;
     }
